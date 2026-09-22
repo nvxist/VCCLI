@@ -15,15 +15,15 @@ public class FFmpegMan {
 
         ProcessBuilder pb = new ProcessBuilder(
                 "ffmpeg",
-                "-y",                  // Overwrite output files without asking
+                "-y",
                 "-f", "image2pipe",
-                "-framerate", "30",    // Reduced to 30 FPS (more realistic for Java Robot)
+                "-framerate", "30",
                 "-i", "-",
-                "-c:v", "libx264",
+                "-c:v", "h264_qsv",       // Intel QuickSync Hardware Acceleration
+                "-preset", "fast",
                 "-pix_fmt", "yuv420p",
                 timestamp + ".mp4"
         );
-
 
         pb.redirectError(ProcessBuilder.Redirect.INHERIT);
 
